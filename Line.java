@@ -118,4 +118,13 @@ public class Line {
 	public void setLineTwo(Line newLine) {
 		this.nextLineTwo = newLine;
 	}
+
+	
+	@Override
+	public String toString() {
+		return "[Line = " + lineNo + ", Cars = " + getCarNums() + "]";
+	}
+	
+	
+	
 }

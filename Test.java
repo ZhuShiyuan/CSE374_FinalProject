@@ -26,11 +26,21 @@ public class Test {
 //	private Sidewalk ssix;
 
 	public static void main(String[] args) {
+		
 		setIntersection();
-
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Please enter the line list: ");
+		String s = keyboard.nextLine();
+		String[] slist = s.split(" ");
+		int[][] list = new int[slist.length / 2][2];
+		for (int i = 0; i < slist.length / 2; i++) {
+			list[i][0] = Integer.parseInt(slist[i * 2]);
+			list[i][1] = Integer.parseInt(slist[i * 2 + 1]);
+		}
+		System.out.println(trafficControl(list).toString());
 	}
 
-	private Line[] trafficControl(int[][] list) {
+	private static Line[] trafficControl(int[][] list) {
 		if (list == null && lines == null)
 			return null;
 		if (list == null && lines != null) {
@@ -42,7 +52,7 @@ public class Test {
 		return getLines(lines);
 	}
 
-	private void addNewCars(Line[] lines, int[][] list) {
+	private static void addNewCars(Line[] lines, int[][] list) {
 		for (int[] i : list) {
 			for (Line j : lines) {
 				if (j.getLineNo() == i[0] - 1) {
@@ -55,7 +65,7 @@ public class Test {
 	}
 
 	// I'm not sure it works
-	private void sort(Line[] lines) {
+	private static void sort(Line[] lines) {
 		for (int j = 2; j < lines.length; j++) {
 			Line key = lines[j];
 			int i = j - 1;
@@ -68,7 +78,7 @@ public class Test {
 		}
 	}
 
-	private boolean greaterThan(Line first, Line second) {
+	private static boolean greaterThan(Line first, Line second) {
 		if (first.getFirstWaitTime() != second.getFirstWaitTime()) {
 			return first.getFirstWaitTime() > second.getFirstWaitTime();
 		} else if (first.getTotalWaitTime() != second.getTotalWaitTime()) {
@@ -80,17 +90,22 @@ public class Test {
 			return true;
 	}
 
-	private Line[] getLines(Line[] lines) {
+	private static Line[] getLines(Line[] lines) {
 		ArrayList<Line> alist = lines[0].getLineList();
 		Line[] list = new Line[alist.size() + 1];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = alist.get(i);
 		}
 		list[list.length - 1] = lines[0];
+		for (Line i : list) {
+			if (i.getCarNums() < 10)
+				i.removeCar(i.getCarNums());
+			else i.removeCar(10);
+		}
 		return list;
 	}
 
-	private void addWaitTime(Line[] lines, int num) {
+	private static void addWaitTime(Line[] lines, int num) {
 		for (Line i : lines) {
 			i.addWaitTime(num);
 		}
