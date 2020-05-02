@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Line {
 
-	private PriorityQueue<Car> carList;
+	private Queue<Car> carList;
 	private ArrayList<Line> lineList;
 	private ArrayList<Sidewalk> sidewalkList;
 	private int lineNo;
@@ -49,6 +49,8 @@ public class Line {
 	// Warning!!!!!!!!!!!!!!
 	// Get average wait time
 	public int getAverageWaitTime() {
+		if (carList.size() == 0)
+			return 0;
 		return (int) (getTotalWaitTime() / carList.size());
 	}
 
@@ -119,12 +121,9 @@ public class Line {
 		this.nextLineTwo = newLine;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "[Line = " + lineNo + ", Cars = " + getCarNums() + "]";
 	}
-	
-	
-	
+
 }

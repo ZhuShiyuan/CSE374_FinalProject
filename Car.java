@@ -1,5 +1,5 @@
 
-public class Car {
+public class Car implements Comparable<Car>{
 
 	private int waitTime;
 
@@ -17,6 +17,11 @@ public class Car {
 
 	public void addWaitTime(int num) {
 		this.waitTime += num;
+	}
+
+	@Override
+	public int compareTo(Car o) {
+		return this.waitTime - o.waitTime;
 	}
 
 }

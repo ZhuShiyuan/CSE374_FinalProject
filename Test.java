@@ -26,18 +26,21 @@ public class Test {
 //	private Sidewalk ssix;
 
 	public static void main(String[] args) {
-		
 		setIntersection();
-		Scanner keyboard = new Scanner(System.in);
-		System.out.println("Please enter the line list: ");
-		String s = keyboard.nextLine();
-		String[] slist = s.split(" ");
-		int[][] list = new int[slist.length / 2][2];
-		for (int i = 0; i < slist.length / 2; i++) {
-			list[i][0] = Integer.parseInt(slist[i * 2]);
-			list[i][1] = Integer.parseInt(slist[i * 2 + 1]);
+		while (true) {
+			Scanner keyboard = new Scanner(System.in);
+			System.out.print("Please enter the line list: ");
+			String s = keyboard.nextLine();
+			if (s.equals("exit"))
+				break;
+			String[] slist = s.split(" ");
+			int[][] list = new int[slist.length / 2][2];
+			for (int i = 0; i < slist.length / 2; i++) {
+				list[i][0] = Integer.parseInt(slist[i * 2]);
+				list[i][1] = Integer.parseInt(slist[i * 2 + 1]);
+			}
+			System.out.println(trafficControl(list).toString());
 		}
-		System.out.println(trafficControl(list).toString());
 	}
 
 	private static Line[] trafficControl(int[][] list) {
@@ -93,14 +96,15 @@ public class Test {
 	private static Line[] getLines(Line[] lines) {
 		ArrayList<Line> alist = lines[0].getLineList();
 		Line[] list = new Line[alist.size() + 1];
-		for (int i = 0; i < list.length; i++) {
+		for (int i = 0; i < list.length - 1; i++) {
 			list[i] = alist.get(i);
 		}
 		list[list.length - 1] = lines[0];
 		for (Line i : list) {
 			if (i.getCarNums() < 10)
 				i.removeCar(i.getCarNums());
-			else i.removeCar(10);
+			else
+				i.removeCar(10);
 		}
 		return list;
 	}
@@ -115,7 +119,7 @@ public class Test {
 		// Make the line list
 		lines = new Line[totalLines];
 		// Use for loop
-		for (int i = 0; i < totalSidewalks; i++) {
+		for (int i = 0; i < totalLines; i++) {
 			lines[i] = new Line(i);
 		}
 //		lines[0] = new Line(1, null, null);
