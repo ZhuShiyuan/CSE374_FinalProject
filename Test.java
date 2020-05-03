@@ -4,7 +4,7 @@ public class Test {
 
 	static Line[] lines;
 	static Sidewalk[] sidewalks;
-	final private static int totalLines = 12;
+	final private static int totalLines = 4;
 	final private static int totalSidewalks = 6;
 //	private Line one;
 //	private Line two;
@@ -27,19 +27,28 @@ public class Test {
 
 	public static void main(String[] args) {
 		setIntersection();
+		Line[] output;
 		while (true) {
 			Scanner keyboard = new Scanner(System.in);
 			System.out.print("Please enter the line list: ");
 			String s = keyboard.nextLine();
 			if (s.equals("exit"))
 				break;
-			String[] slist = s.split(" ");
-			int[][] list = new int[slist.length / 2][2];
-			for (int i = 0; i < slist.length / 2; i++) {
-				list[i][0] = Integer.parseInt(slist[i * 2]);
-				list[i][1] = Integer.parseInt(slist[i * 2 + 1]);
+
+			if (!s.isEmpty()) {
+				String[] slist = s.split(" ");
+				int[][] list = new int[slist.length / 2][2];
+				for (int i = 0; i < slist.length / 2; i++) {
+					list[i][0] = Integer.parseInt(slist[i * 2]);
+					list[i][1] = Integer.parseInt(slist[i * 2 + 1]);
+				}
+				output = trafficControl(list);
+			} else {
+				output = trafficControl(null);
 			}
-			System.out.println(trafficControl(list).toString());
+			for (Line i : output) {
+				System.out.println(i.toString());
+			}
 		}
 	}
 
@@ -47,6 +56,7 @@ public class Test {
 		if (list == null && lines == null)
 			return null;
 		if (list == null && lines != null) {
+			sort(lines);
 			return getLines(lines);
 		}
 		addNewCars(lines, list);
@@ -60,7 +70,6 @@ public class Test {
 			for (Line j : lines) {
 				if (j.getLineNo() == i[0] - 1) {
 					j.addCar(i[1]);
-					// I'm not sure I'm breaking one loop or both of them
 					break;
 				}
 			}
@@ -68,16 +77,29 @@ public class Test {
 	}
 
 	// I'm not sure it works
-	private static void sort(Line[] lines) {
-		for (int j = 2; j < lines.length; j++) {
-			Line key = lines[j];
-			int i = j - 1;
-			while (i > 0 && greaterThan(lines[i], key)) {
+//	private static void sort(Line[] lines) {
+//		for (int j = 2; j < lines.length; j++) {
+//			Line key = lines[j];
+//			int i = j - 1;
+//			while (i > 0 && greaterThan(lines[i], key)) {
+//
+//				lines[i + 1] = lines[i];
+//				i--;
+//			}
+//			lines[i + 1] = key;
+//		}
+//	}
 
-				lines[i + 1] = lines[i];
-				i--;
+	private static void sort(Line[] lines) {
+		int n = lines.length;
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+				if (!greaterThan(lines[j], lines[j + 1])) {
+					Line temp = lines[j];
+					lines[j] = lines[j + 1];
+					lines[j + 1] = temp;
+				}
 			}
-			lines[i + 1] = key;
 		}
 	}
 

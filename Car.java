@@ -4,7 +4,7 @@ public class Car implements Comparable<Car>{
 	private int waitTime;
 
 	public Car() {
-		this.waitTime = 0;
+		this.waitTime = 1;
 	}
 
 	public Car(int waitTime) {

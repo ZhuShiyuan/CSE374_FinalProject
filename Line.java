@@ -77,6 +77,7 @@ public class Line {
 		if (this.nextLineOne == null) {
 			while (num > 0) {
 				carList.poll();
+				num--;
 			}
 			return true;
 		}
@@ -123,7 +124,7 @@ public class Line {
 
 	@Override
 	public String toString() {
-		return "[Line = " + lineNo + ", Cars = " + getCarNums() + "]";
+		return "[Line = " + (lineNo + 1) + ", Cars = " + getCarNums() + "]";
 	}
 
 }
