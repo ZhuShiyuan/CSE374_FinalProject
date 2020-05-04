@@ -6,24 +6,6 @@ public class TrafficSolution {
 	static Sidewalk[] sidewalks;
 	final private static int totalLines = 12;
 	final private static int totalSidewalks = 6;
-//	private Line one;
-//	private Line two;
-//	private Line three;
-//	private Line four;
-//	private Line five;
-//	private Line six;
-//	private Line seven;
-//	private Line eight;
-//	private Line nine;
-//	private Line ten;
-//	private Line eleven;
-//	private Line twelve;
-//	private Sidewalk sone;
-//	private Sidewalk stwo;
-//	private Sidewalk sthree;
-//	private Sidewalk sfour;
-//	private Sidewalk sfive;
-//	private Sidewalk ssix;
 
 	public static void main(String[] args) {
 		setIntersection();
@@ -32,9 +14,8 @@ public class TrafficSolution {
 			Scanner keyboard = new Scanner(System.in);
 			System.out.print("Please enter the line list: ");
 			String s = keyboard.nextLine();
-			if (s.equals("exit"))
+			if (s.equals("exit") || s.equals("Exit"))
 				break;
-
 			if (!s.isEmpty()) {
 				String[] slist = s.split(" ");
 				int[][] list = new int[slist.length / 2][2];
@@ -144,18 +125,6 @@ public class TrafficSolution {
 		for (int i = 0; i < totalLines; i++) {
 			lines[i] = new Line(i);
 		}
-//		lines[0] = new Line(1, null, null);
-//		lines[1] = new Line(3, null, null);
-//		lines[2] = new Line(4, null, null);
-//		lines[3] = new Line(5, null, null);
-//		lines[4] = new Line(6, null, null);
-//		lines[5] = new Line(8, null, null);
-//		lines[6] = new Line(10, null, null);
-//		lines[7] = new Line(11, null, null);
-//		lines[8] = new Line(2, lines[5 - 1], lines[6 - 1]);
-//		lines[9] = new Line(7, lines[3 - 1], lines[4 - 1]);
-//		lines[10] = new Line(9, lines[3 - 1], lines[4 - 1]);
-//		lines[11] = new Line(12, lines[5 - 1], lines[6 - 1]);
 
 		// Make the sidewalk list
 		sidewalks = new Sidewalk[totalSidewalks];
@@ -175,9 +144,75 @@ public class TrafficSolution {
 
 		lines[0].addLine(lines[1]);
 		lines[0].addLine(lines[2]);
+		lines[0].addLine(lines[4]);
 		lines[0].addLine(lines[5]);
-		lines[0].addLine(lines[8]);
-		lines[0].addLine(lines[9]);
+		lines[0].addLine(lines[6]);
+
+		lines[1].addLine(lines[0]);
+		lines[1].addLine(lines[2]);
+		lines[1].addLine(lines[4]);
+		lines[1].addLine(lines[5]);
+		lines[1].addLine(lines[6]);
+
+		lines[2].addLine(lines[3]);
+		lines[2].addLine(lines[4]);
+		lines[2].addLine(lines[5]);
+		lines[2].addLine(lines[6]);
+		lines[2].addLine(lines[11]);
+
+		lines[3].addLine(lines[2]);
+		lines[3].addLine(lines[4]);
+		lines[3].addLine(lines[5]);
+		lines[3].addLine(lines[6]);
+		lines[3].addLine(lines[11]);
+
+		lines[4].addLine(lines[2]);
+		lines[4].addLine(lines[3]);
+		lines[4].addLine(lines[5]);
+		lines[4].addLine(lines[6]);
+		lines[4].addLine(lines[11]);
+
+		lines[5].addLine(lines[2]);
+		lines[5].addLine(lines[3]);
+		lines[5].addLine(lines[4]);
+		lines[5].addLine(lines[6]);
+		lines[5].addLine(lines[11]);
+
+		lines[6].addLine(lines[2]);
+		lines[6].addLine(lines[3]);
+		lines[6].addLine(lines[7]);
+		lines[6].addLine(lines[9]);
+		lines[6].addLine(lines[11]);
+
+		lines[7].addLine(lines[2]);
+		lines[7].addLine(lines[3]);
+		lines[7].addLine(lines[6]);
+		lines[7].addLine(lines[9]);
+		lines[7].addLine(lines[11]);
+
+		lines[8].addLine(lines[2]);
+		lines[8].addLine(lines[3]);
+		lines[8].addLine(lines[5]);
+		lines[8].addLine(lines[9]);
+		lines[8].addLine(lines[11]);
+
+		lines[9].addLine(lines[2]);
+		lines[9].addLine(lines[3]);
+		lines[9].addLine(lines[5]);
+		lines[9].addLine(lines[8]);
+		lines[9].addLine(lines[11]);
+
+		lines[10].addLine(lines[0]);
+		lines[10].addLine(lines[4]);
+		lines[10].addLine(lines[5]);
+		lines[10].addLine(lines[6]);
+		lines[10].addLine(lines[11]);
+
+		lines[11].addLine(lines[0]);
+		lines[11].addLine(lines[4]);
+		lines[11].addLine(lines[5]);
+		lines[11].addLine(lines[6]);
+		lines[11].addLine(lines[10]);
 
 	}
 
